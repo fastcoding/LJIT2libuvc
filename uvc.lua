@@ -199,6 +199,15 @@ local function uvc_strerror(num)
 	return plat.getValueName(num, Enums.uvc_error);
 end
 
+local function uvc_get_enum_value(name)
+	for k,value in pairs(Enums) do 
+		if value[name] then
+			return value[name];
+		end
+	end
+	return nil;
+end
+
 local Functions = {
 	uvc_strerror = uvc_strerror;
 }
@@ -232,13 +241,14 @@ setmetatable(exports, {
 	end,
 
 	__index = function(self, key)
-		-- lookup the thing in the library
+		-- first look for a function of the given name
 		local success, value = pcall(function() return Lib_uvc[key] end)
-		if not success then
-			return nil, "not found";
+		if success then
+			return value;
 		end
 
-		return value;
+		-- next, look for an enum with the given name
+		return uvc_get_enum_value(key);
 	end,
 })
 
