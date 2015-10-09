@@ -31,7 +31,16 @@ local function getValueName(num, tbl)
 	return string.format("UNKNOWN [%d]", num)
 end
 
+local function ffistring(ptr)
+	if ptr == nil then
+		return nil;
+	end
+
+	return ffi.string(ptr)
+end
+
 local exports = {
+	ffistring = ffistring;
 	getValueName = getValueName;
 }
 

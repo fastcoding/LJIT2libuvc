@@ -205,21 +205,15 @@ ffi.cdef[[
  * @ingroup streaming
  */
 typedef struct uvc_frame {
-  /** Image data for this frame */
   void *data;
-  /** Size of image data buffer */
   size_t data_bytes;
-  /** Width of image in pixels */
   uint32_t width;
-  /** Height of image in pixels */
   uint32_t height;
-  /** Pixel data format */
+
   int frame_format;   //   enum uvc_frame_format
   /** Number of bytes per horizontal line (undefined for compressed format) */
   size_t step;
-  /** Frame number (may skip, but is strictly monotonically increasing) */
   uint32_t sequence;
-  /** Estimate of system time when the device started capturing the image */
   struct timeval capture_time;
   /** Handle on the device that produced the image.
    * @warning You must not call any uvc_* functions during a callback. */

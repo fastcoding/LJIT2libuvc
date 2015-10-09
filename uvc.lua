@@ -1,4 +1,5 @@
-local Lib_uvc = require("uvc_ffi")
+
+local ffi = require("ffi")
 local bit = require("bit")
 local band, bor, lshift, rshift = bit.band, bit.bor, bit.lshift, bit.rshift
 
@@ -192,6 +193,12 @@ local Enums = {
 		UVC_STATUS_ATTRIBUTE_FAILURE_CHANGE = 0x02,
 		UVC_STATUS_ATTRIBUTE_UNKNOWN = 0xff
 	};
+}
+
+local Types = {
+	uvc_device_descriptor = ffi.typeof("struct uvc_device_descriptor");
+	uvc_frame = ffi.typeof("struct uvc_frame");
+	uvc_stream_ctrl = ffi.typeof("struct uvc_stream_ctrl");	
 }
 
 
