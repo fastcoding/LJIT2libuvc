@@ -39,6 +39,14 @@ function UVCContext.new(self, ...)
 	return self:init(ctx[0]);
 end
 
+function UVCContext.getFirstDevice(self)
+	for _, device in self:devices() do
+		return device;
+	end
+
+	return nil;
+end
+
 -- iterator for devices
 local function nil_gen()
 	return nil;

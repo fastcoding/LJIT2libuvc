@@ -5,6 +5,8 @@ local uvc = require("uvc")
 local ljplatform = require("ljplatform")
 
 local ffistring = ljplatform.ffistring
+local UVCCallbackStream = require("UVCCallbackStream")
+
 
 local UVCDevice = {}
 setmetatable(UVCDevice, {
@@ -91,5 +93,8 @@ function UVCDevice.close(self)
 	self.OpenHandle = nil;
 end
 
+function UVCDevice.getCallbackStream(self, framecb)
+	return UVCCallbackStream(self.Handle, framecb)
+end
 
 return UVCDevice
