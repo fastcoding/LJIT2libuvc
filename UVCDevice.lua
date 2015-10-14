@@ -36,6 +36,8 @@ function UVCDevice.init(self, rawHandle)
 	local obj = {
 		Handle = rawHandle;
 
+		BusNumber = uvc.uvc_get_bus_number(rawHandle);
+		BusAddress = uvc.uvc_get_device_address(rawHandle);
     	VendorID = tonumber(desc.idVendor);
     	ProductID = tonumber(desc.idProduct);
     	bcdUVC = tonumber(desc.bcdUVC);
