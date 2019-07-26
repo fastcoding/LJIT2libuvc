@@ -288,6 +288,8 @@ int /* uvc_error_t */ uvc_open(
     uvc_device_handle_t **devh);
 void uvc_close(uvc_device_handle_t *devh);
 
+uvc_device_handle_t* uvc_handle_from_fd(uvc_context_t*ctx,intptr_t sys_dev);
+
 uvc_device_t *uvc_get_device(uvc_device_handle_t *devh);
 libusb_device_handle *uvc_get_libusb_handle(uvc_device_handle_t *devh);
 
@@ -306,7 +308,7 @@ const uvc_extension_unit_t *uvc_get_extension_units(uvc_device_handle_t *devh);
 int /* uvc_error_t */ uvc_get_stream_ctrl_format_size(
     uvc_device_handle_t *devh,
     uvc_stream_ctrl_t *ctrl,
-    int format,   // enum uvc_frame_format 
+    int format,   // enum uvc_frame_format
     int width, int height,
     int fps
     );

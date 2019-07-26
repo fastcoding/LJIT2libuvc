@@ -26,7 +26,7 @@ function UVCDevice.init(self, rawHandle)
 	local desc = ffi.new("uvc_device_descriptor_t *[1]")
 
 	local res = uvc.uvc_get_device_descriptor(rawHandle, desc);
-    if res < 0 then 
+    if res < 0 then
     	return nil;
     end
 
@@ -59,13 +59,12 @@ function UVCDevice.new(self, rawHandle)
 	return self:init(rawHandle);
 end
 
-
 function UVCDevice.toString(self)
 	return string.format([[
       Product: %s
- Manufacturer: %s 
-    Vendor ID: %#x 
-   Product ID: %#x 
+ Manufacturer: %s
+    Vendor ID: %#x
+   Product ID: %#x
        bcdUVC: %d
 Serial Number: %s
 ]],
@@ -81,14 +80,16 @@ end
 function UVCDevice.open(self)
 	local devh = ffi.new("uvc_device_handle_t *[1]")
 	local res = uvc.uvc_open(self.Handle, devh);
-	
+
 	if res < 0 then return false end
-	
+
 	devh = devh[0]
 	ffi.gc(devh, uvc.uvc_close);
 
 	self.OpenHandle = devh;
 end
+
+
 
 function UVCDevice.close(self)
 	uvc.uvc_close(self.OpenHandle);

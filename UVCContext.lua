@@ -47,6 +47,11 @@ function UVCContext.getFirstDevice(self)
 	return nil;
 end
 
+function UVCContext.deviceByFd(self,fd)
+	local rawHandle=uvc.uvc_handle_from_fd(self.Handle,fd)
+	return UVCDevice(rawHandle)
+end
+
 -- iterator for devices
 local function nil_gen()
 	return nil;
@@ -65,7 +70,7 @@ function UVCContext.devices(self)
 
 	--ffi.gc(devlist[0], free_device_list);
 
-	
+
 	local function device_gen(device_list, idx)
 		if device_list[idx] == nil then
 			return nil;
